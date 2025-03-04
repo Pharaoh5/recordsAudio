@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="audio">
+    <mat-table [dataSource]="audioService.audioRecords" class="custom-table mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cell">ID</th>
+          <td mat-cell *matCellDef="let record" class="mat-cell">{{record.id}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cell">Name</th>
+          <td mat-cell *matCellDef="let record" class="mat-cell">{{record.name}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-cell">File</th>
+          <td mat-cell *matCellDef="let record" class="mat-cell">
+            <button mat-button (click)="playAudio(record.file)">Play</button>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></tr>
+      </mat-table>
+  </div>
+  
+    <div *ngIf="selectedAudio">
+      <audio controls [src]="selectedAudio"></audio>
+    </div>
+</div>
